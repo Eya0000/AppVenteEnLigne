@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -13,6 +14,12 @@ public class OrderItem {
 	@JoinColumn(name = "order_id") 
 	@ManyToOne
     private Order order;
+	@JoinColumn(name = "product_id") 
+	@OneToOne
+    private Product product;
+	@JoinColumn(name = "panier_id") 
+	@ManyToOne
+    private Panier panier;
 	
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +44,12 @@ public class OrderItem {
 		public void setOrder(Order order) {
 			this.order = order;
 		}
-	public OrderItem(Long id,  int quantity, Order order) {
+	public OrderItem(Long id,  int quantity, Order order,Product product,Panier panier) {
 		this.id = id;
 		this.quantity = quantity;
 		this.order=order;
+		this.product=product;
+		this.panier=panier;
 	}
 	public OrderItem() {}
 
