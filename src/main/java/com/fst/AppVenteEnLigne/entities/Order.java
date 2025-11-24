@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "order")
+@Table(name = "Order")
 public class Order {
 	@JoinColumn(name = "user_id") 
 	@ManyToOne
