@@ -1,6 +1,7 @@
 package com.fst.AppVenteEnLigne.entities;
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,14 +29,14 @@ public class Panier {
 
 
 
-public long getId() {
+public Long getId() {
 	return id;
 }
 
-public void setId(long id) {
+public void setId(Long id) {
 	this.id = id;
 }
-public Panier (long id,User user) {
+public Panier (Long id,User user) {
 this.id=id;
 this.user=user;
 }

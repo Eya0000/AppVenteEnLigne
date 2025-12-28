@@ -2,6 +2,7 @@ package com.fst.AppVenteEnLigne.entities;
 
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,33 +10,33 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 
+
 @Entity
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	//@NotBlank(message="le nom est obligatoire")
 	private String namePr;
-	private double price;
+	private Double price;
 	private String description;
 	private String image;
-	
+	private Integer quantityStock;
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
-	
+
 	public Category getCategory() {
 		return category;
 	}
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id= id;
 	} 
 	
@@ -45,10 +46,10 @@ public class Product {
 	public void setNamePr(String namePr) {
 		this.namePr = namePr;
 	}
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	
@@ -64,24 +65,25 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public int getQuantity() {
-		return quantity;
+	public Integer getQuantityStock() {
+		return quantityStock;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuantityStock(Integer quantityStock) {
+		this.quantityStock = quantityStock;
 	}
 
-	private int quantity;
 	
-	public Product( String namePr , double price,String description, Category category,String image, int quantity) {
-			
+	public Product(Long id, String namePr , Double price,String description, Category category,String image, Integer quantityStock ) {
+		this.id= id;	
 		this.namePr = namePr;
 		this.price = price;
 		this.description=description;
 		this.category=category;
 		this.image=image;
-		this.quantity=quantity;
+		this.quantityStock=quantityStock;
+		
 	}
+	
 	public Product() {
 		
 	}
