@@ -18,7 +18,7 @@ import com.fst.AppVenteEnLigne.repository.PanierRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/Panier")
+@RequestMapping("/paniers")
 public class PanierController {
 	@Autowired
 	private PanierRepository panierRepository;

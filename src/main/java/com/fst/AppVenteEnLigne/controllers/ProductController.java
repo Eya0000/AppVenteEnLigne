@@ -41,7 +41,7 @@ public class ProductController {
 	    prod.setDescription(updated.getDescription());
 	    prod.setCategory(updated.getCategory());
 	    prod.setImage(updated.getImage());
-	    prod.setQuantity(updated.getQuantity());
+	    prod.setQuantityStock(updated.getQuantityStock());
 	    
 	        return productRepository.save(prod);
 	   }
