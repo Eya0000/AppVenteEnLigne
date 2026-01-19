@@ -1,4 +1,4 @@
-package com.fst.AppVenteEnLigne.services;
+package com.fst.AppVenteEnLigne.service;
 
 import java.util.Optional;
 
@@ -16,8 +16,8 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class OrderItemService {
-
-    private final OrderItemRepository orderItemRepository;
+	
+	private final OrderItemRepository orderItemRepository;
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
 
@@ -28,25 +28,28 @@ public class OrderItemService {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
     }
-
-    /**
-     * Ajouter un produit à une commande et recalculer le total
-     */
+    
     public Order addOrderItem(OrderItem orderItem) {
-        // 1️⃣ Charger la commande
+
+    	// 1️⃣ Charger la commande
         Order order = orderRepository.findById(orderItem.getOrder().getId())
                 .orElseThrow(() -> new RuntimeException("Order not found"));
+        order.getOrderItems().size(); // force le chargement de la collection
+
+        // Initialiser la collection pour éviter lazy-loading
+        if (order.getOrderItems() == null) {
+            order.setOrderItems(new java.util.ArrayList<>());
+        }
 
         // 2️⃣ Charger le produit
         Product product = productRepository.findById(orderItem.getProduct().getId())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         // 3️⃣ Vérifier si le produit existe déjà dans la commande
-        Optional<OrderItem> existingItemOpt 
-                orderItemRepository.findByOrderIdAndProductId(order.getId(), product.getId());
+        Optional<OrderItem> existingItemOpt = orderItemRepository
+                .findByOrderIdAndProductId(order.getId(), product.getId());
 
         if (existingItemOpt.isPresent()) {
-            // Produit déjà présent → augmenter la quantité
             OrderItem existingItem = existingItemOpt.get();
             existingItem.setQuantity(existingItem.getQuantity() + orderItem.getQuantity());
             orderItemRepository.save(existingItem);
@@ -55,17 +58,16 @@ public class OrderItemService {
             orderItem.setOrder(order);
             orderItem.setProduct(product);
             orderItemRepository.save(orderItem);
-
-            // Ajouter à la collection pour que calculateTotal voie ce nouvel item
-            order.getOrderItems().add(orderItem);
+            order.getOrderItems().add(orderItem); // safe, collection initialisée
         }
+       
 
-        // 4️⃣ Recalculer le total depuis la base pour être sûr
-        Double total = orderItemRepository.calculateTotalByOrderId(order.getId());
-        if (total == null) total = 0.0;
-        order.setTotale(total);
+        // 4️⃣ Calcul automatique du total
+        order.calculateTotal();
+        orderRepository.save(order);
 
-        // 5️⃣ Sauvegarde finale de la commande
-        return orderRepository.save(order);
+        return order;
     }
+    
+
 }

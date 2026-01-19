@@ -4,6 +4,7 @@ package com.fst.AppVenteEnLigne.entities;
 
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +34,7 @@ public User getUser() {
 
 
 
-public long getId() {
+public Long getId() {
 	return id;
 }
 

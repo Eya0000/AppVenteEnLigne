@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -42,7 +46,11 @@ public class Order {
 	     private LocalDate dateOr;
 	     
 	     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+<<<<<<< HEAD
 	     private Double totale = 0.0;
+=======
+	     private Double totale;
+>>>>>>> origin/main
 
 		 public Long getId() {
 				return id;
@@ -81,6 +89,7 @@ public class Order {
 				this.user=user;
 				this.orderItems = orderItems;
 			}
+<<<<<<< HEAD
 			public Order() {}
 			
 			
@@ -102,5 +111,28 @@ public class Order {
 
 			    this.totale = totale;
 			}
+=======
+			
+	          public Order() {}
+@PrePersist
+@PreUpdate
+public void updateTotal() {
+			calculateTotal();
+			   }
+			
+// 🔥 CALCUL AUTOMATIQUE DU TOTAL
+public void calculateTotal() {
+    if (orderItems != null) {
+        this.totale = orderItems.stream()
+                                .mapToDouble(OrderItem::getSubTotal)
+                                .sum();
+    } else {
+        this.totale = 0.0;
+    }
+}
+
+		 
+
+>>>>>>> origin/main
 
 }

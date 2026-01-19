@@ -2,23 +2,26 @@ package com.fst.AppVenteEnLigne.entities;
 
 import java.util.List;
 
+
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+ jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Role {
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)//  clé auto-incrémentée
-	 private Long id;  
-	
+	 private Long id; 	
 	 @NotBlank(message="remplir le champ")
 	  private String nameR;
-	  
-	
+
+	 //@NotBlank(message="remplir le champ")
+	     private String nameR;
+
 	public Long getId() {
 		return id;
 	}

@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fst.AppVenteEnLigne.entities.Category;
 import com.fst.AppVenteEnLigne.repository.CategoryRepository;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/main
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("categories")
@@ -32,8 +35,8 @@ public class CategoryController {
 	   }
 
  @PostMapping
-	public Category createCategory(@RequestBody Category c) {
-	     return categoryRepository.save(c);
+	public Category createCategory(@RequestBody Category cat) {
+	     return categoryRepository.save(cat);
 	    }
 
 	    @PutMapping("/{id}")

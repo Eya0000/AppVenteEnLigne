@@ -83,11 +83,16 @@ public class OrderItem {
 	}
 	public OrderItem() {}
 	
+<<<<<<< HEAD
 	// 🔥 Calcul du sous-total
     public double getSubTotal() {
     	 if (product == null || product.getPrice() == null) {
     	        return 0.0; // ou gérer autrement
     	    }
+=======
+	 // 🔥 Calcul du sous-total
+        public double getSubTotal() {
+>>>>>>> origin/main
         return quantity * product.getPrice();
     }
 

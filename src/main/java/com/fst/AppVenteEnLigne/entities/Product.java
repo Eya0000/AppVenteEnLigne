@@ -4,12 +4,14 @@ package com.fst.AppVenteEnLigne.entities;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
 
 
 @Entity
@@ -21,15 +23,17 @@ public class Product {
 	//@NotBlank(message="le nom est obligatoire")
 	private String namePr;
 	private Double price;
+<<<<<<< HEAD
 	private Integer quantityStock;
+=======
+>>>>>>> origin/main
 	private String description;
 	private String image;
-	
+	private Integer quantityStock;
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
-	
+
 	public Category getCategory() {
 		return category;
 	}
@@ -71,6 +75,7 @@ public class Product {
 	public Integer getQuantityStock() {
 		return quantityStock;
 	}
+<<<<<<< HEAD
 	public void setQuantityStock(Integer quantity) {
 		this.quantityStock = quantity;
 	}
@@ -79,13 +84,27 @@ public class Product {
 	
 	public Product( Long id,String namePr , Double price,String description, Category category,String image, Integer quantityStock) {
 		this.id=id;	
+=======
+	public void setQuantityStock(Integer quantityStock) {
+		this.quantityStock = quantityStock;
+	}
+
+	
+	public Product(Long id, String namePr , Double price,String description, Category category,String image, Integer quantityStock ) {
+		this.id= id;	
+>>>>>>> origin/main
 		this.namePr = namePr;
 		this.price = price;
 		this.description=description;
 		this.category=category;
 		this.image=image;
 		this.quantityStock=quantityStock;
+<<<<<<< HEAD
+=======
+		
+>>>>>>> origin/main
 	}
+	
 	public Product() {
 		
 	}

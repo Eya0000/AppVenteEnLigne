@@ -15,6 +15,7 @@ public interface OrderRepository extends JpaRepository <Order,Long> {
 	List<Order> findByUserId(Long userId);
 	
 	// Méthode existante
+<<<<<<< HEAD
 		@Query("SELECT o FROM Order o LEFT JOIN FETCH o.orderItems WHERE o.id = :id")
 		Optional<Order> findByIdWithItems(@Param("id") Long id);
 		
@@ -25,5 +26,14 @@ public interface OrderRepository extends JpaRepository <Order,Long> {
 
 
 	}
+=======
+	@Query("SELECT o FROM Order o LEFT JOIN FETCH o.orderItems WHERE o.id = :id")
+	Optional<Order> findByIdWithItems(@Param("id") Long id);
+	
+	
+	// <-- AJOUTER CETTE MÉTHODE pour fetch tous les orders avec leurs orderItems
+    @Query("SELECT DISTINCT o FROM Order o LEFT JOIN FETCH o.orderItems")
+    List<Order> findAllWithItems();
+>>>>>>> origin/main
 
 
